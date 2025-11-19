@@ -1,0 +1,5 @@
+plural-noun,animals
+adjective,energetic
+verb,come
+noun,wolf,flock
+past-tense-verb,laughed,jeered,yelled,waved

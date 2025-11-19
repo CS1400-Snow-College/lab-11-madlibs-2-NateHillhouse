@@ -8,11 +8,11 @@ Lab 11 - Mad Libs 2
 
 class Program {
     static void Main(string[] filenames) {
+        Console.Clear();
+        Dictionary<string, string[]> wordbank = CreateDict("WordBank.txt");
         foreach (string filename in filenames) {
-            Console.WriteLine(filename);
-
             string storytext = File.ReadAllText(filename);
-            story(storytext);
+            story(storytext, wordbank);
             //string[] splittext = storytext.Split(" ", "::");
             //story(filename);
         }
@@ -24,10 +24,9 @@ class Program {
         int item = rand.Next(dict[key].Count());
         return dict[key][item];
     }
-    static void story(string originalStory)
+    static void story(string originalStory, Dictionary<string, string[]> wordbank)
     {
-        Console.Clear();
-
+        Random rand = new Random();
         char[] vowels = ['a', 'e', 'i', 'o', 'u'];
         string[] splitStory = originalStory.Split(" ");
         List<string> story = new List<string>();
@@ -55,8 +54,10 @@ class Program {
                     }
                     else prefix = "a";
                 }
-                Console.Write($"Please choose {prefix} {word}: ");
-                word = Console.ReadLine();
+                //Console.Write($"Please choose {prefix} {word}: ");
+                string[] newword = word.Split("::");
+                word = wordbank[newword[1]][rand.Next(0,wordbank[newword[1]].Length)];
+                word = newword[0];
                 if (end_sentence) word += '.';
 
                 if (splitStory[item - 1].Contains("/"))
@@ -79,6 +80,23 @@ class Program {
         {
             Console.Write(item + " ");
         }
+    }
+
+    static Dictionary<string, string[]> CreateDict(string file)
+    {
+        string[] words = File.ReadAllLines(file);
+        Dictionary<string, string[]> wordDict = new Dictionary<string, string[]>(); 
+        for  (int i = 0; i < words.Length; i++) 
+        {
+            string item = words[i];
+            string[] itemlist = item.Split(',');
+            //foreach (string x in itemlist) Console.WriteLine(x); 
+            wordDict[itemlist[0].ToLower()] = itemlist[1..itemlist.Length];
+            //foreach (string x in wordDict[itemlist[i]]) Console.WriteLine(x);
+            
+        }
+
+        return wordDict;
     }
 }
 
