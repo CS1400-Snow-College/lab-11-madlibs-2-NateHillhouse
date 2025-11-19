@@ -42,26 +42,18 @@ class Program {
                 bool end_sentence = false;
                 if (word.Contains('.')) end_sentence = true;
                 word = word.Replace("(", "").Replace(")", "").Replace(".", "");
-                bool changed = false;
 
-                //Console.Write($"Please choose {prefix} {word}: ");
-                string[] newword = word.Split("::");
-                int num = wordbank[newword[1]].Length;
-                word = wordbank[newword[1]][rand.Next(0,num)];
-                //word = newword[0];
-                if (end_sentence) word += '.';
-
-                if (splitStory[item - 1].Contains("/"))
+                if (splitStory[item - 1].Contains("::"))
                 {
-                    foreach (char vowel in vowels) if (splitStory[item].StartsWith(vowel)) // FIX TO CHANGE THE PREVIOUS WORD TO A OR AN
-                        {
-                            //word = "an";
-                            changed = true;
-                        }
-                    if (!changed) story[story.Count-1] = "an";
+                    foreach (char vowel in vowels) if (splitStory[item].StartsWith(vowel)) story[story.Count-1] = "an";
                     else story[story.Count-1] = "a";
                     Console.WriteLine(story[story.Count-1]);
                 }
+                string[] newword = word.Split("::");
+                int num = wordbank[newword[1]].Length;
+                word = wordbank[newword[1]][rand.Next(0,num)];
+                if (end_sentence) word += '.';
+
             }
             else word = splitStory[item];
             story.Add(word);
