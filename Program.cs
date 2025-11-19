@@ -39,25 +39,16 @@ class Program {
             {
                 word += splitStory[item];
 
-                string prefix = "a";
                 bool end_sentence = false;
                 if (word.Contains('.')) end_sentence = true;
                 word = word.Replace("(", "").Replace(")", "").Replace(".", "");
                 bool changed = false;
 
-                foreach (char x in vowels)
-                {
-                    if (word.StartsWith(x)) 
-                    {
-                        prefix = "an";
-                        break;
-                    }
-                    else prefix = "a";
-                }
                 //Console.Write($"Please choose {prefix} {word}: ");
                 string[] newword = word.Split("::");
-                word = wordbank[newword[1]][rand.Next(0,wordbank[newword[1]].Length)];
-                word = newword[0];
+                int num = wordbank[newword[1]].Length;
+                word = wordbank[newword[1]][rand.Next(0,num)];
+                //word = newword[0];
                 if (end_sentence) word += '.';
 
                 if (splitStory[item - 1].Contains("/"))

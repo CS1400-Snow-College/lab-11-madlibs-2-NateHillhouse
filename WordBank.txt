@@ -1,5 +1,5 @@
-plural-noun,animals
-adjective,energetic
-verb,come
-noun,wolf,flock
-past-tense-verb,laughed,jeered,yelled,waved
+plural-noun,animals,trees,mountains,lanterns,villagers,footprints
+adjective,energetic,brave,hungry,curious,restless,frightened
+verb,come,chase,watch,hide,wander,climb
+noun,wolf,flock,forest,cottage,shepherd,hilltop
+past-tense-verb,laughed,jeered,yelled,waved,called,whispered,shouted
